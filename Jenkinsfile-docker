@@ -1,0 +1,19 @@
+node {
+    stage('Initialize'){
+        def mavenHome  = tool 'MyMaven'
+ 	def dockerHome  = tool 'MyDocker'
+        env.PATH = "${mavenHome}/bin:${dockerHome}:${env.PATH}:"
+    }
+    stage('Checkout'){
+        checkout scm
+    }
+    stage('Build'){
+        sh 'mvn clean install'  
+    }
+    stage('Docker Build'){
+        sh 'docker build -f Dockerfile -t product-service .'  
+    }
+    stage('Docker Deploy') {
+        sh 'docker run -p 8085:4201 product-service'          
+    }
+}
