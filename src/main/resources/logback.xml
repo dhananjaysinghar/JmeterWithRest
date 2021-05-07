@@ -32,7 +32,7 @@
     <logger name="com.ps.util" level="${log-level:-DEBUG}"/>
     <logger name="com.ps" level="${log-level:-DEBUG}" />
 
-
+<!--    -Dlog-level=INFO-->
     <root level="${log-level:-INFO}">
         <appender-ref ref="logger-console"/>
     </root>
